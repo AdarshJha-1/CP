@@ -13,46 +13,30 @@ using namespace std;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    vector<int> arr(n, 0);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
+    int n, r, b;
+    cin >> n >> r >> b;
+    vector<string> temp(b + 1, "");
 
-    int ans = INT_MAX;
-    int evenC = 0;
-
-    for (const auto &a : arr)
+    int rC = 0;
+    while (rC < r)
     {
-        evenC += a % 2 == 0;
-        if (a % k == 0)
+        for (auto &s : temp)
         {
-            ans = 0;
-            break;
-        }
-        else
-        {
-            ans = min(ans, ((((a / k) + 1) * k) - a));
+            s += "R";
+            rC++;
+            if (rC >= r)
+            {
+                break;
+            }
         }
     }
-
-    if (k == 4)
+    string ans = "";
+    for (auto &s : temp)
     {
-        if (evenC >= 2)
-        {
-            ans = min(ans, 0);
-        }
-        else if (evenC == 1)
-        {
-            ans = min(ans, 1);
-        }
-        else if (evenC == 0)
-        {
-            ans = min(ans, 2);
-        }
+        ans += s;
+        ans += 'B';
     }
+    ans.pop_back();
     cout << ans << endl;
 }
 

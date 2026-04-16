@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+using ll = long long;
+
 // Problem Statement
 /*
 
@@ -13,47 +15,41 @@ using namespace std;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    vector<int> arr(n, 0);
+    ll n, p;
+    cin >> n >> p;
+    vector<ll> R(n, 0), C(n, 0);
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        cin >> R[i];
     }
-
-    int ans = INT_MAX;
-    int evenC = 0;
-
-    for (const auto &a : arr)
+    ll smallestCost = INT_MAX;
+    for (int i = 0; i < n; i++)
     {
-        evenC += a % 2 == 0;
-        if (a % k == 0)
-        {
-            ans = 0;
-            break;
-        }
-        else
-        {
-            ans = min(ans, ((((a / k) + 1) * k) - a));
-        }
+        cin >> C[i];
+        smallestCost = min(smallestCost, C[i]);
     }
-
-    if (k == 4)
+    if (smallestCost <= p)
     {
-        if (evenC >= 2)
+        cout << p * n << endl;
+        return;
+    }
+    vector<pair<int, int>> vp;
+    for (int i = 0; i < n; i++)
+    {
+        vp.push_back({C[i], R[i]});
+    }
+    sort(vp.begin(), vp.end());
+    ll totalCost = p;
+    int i = 0;
+    for (; i < n; i++)
+    {
+        auto [cost, rShare] = vp[i];
+        while (rShare--)
         {
-            ans = min(ans, 0);
-        }
-        else if (evenC == 1)
-        {
-            ans = min(ans, 1);
-        }
-        else if (evenC == 0)
-        {
-            ans = min(ans, 2);
+            totalCost += cost;
+            i++;
         }
     }
-    cout << ans << endl;
 }
 
 int main()
