@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Two_Knights.cpp
+ * File:         Two_Sets.cpp
  * Date:         2026-06-08
- * Time:         00:32:15
+ * Time:         01:27:56
  * ==========================================================
  */
 
@@ -15,10 +15,46 @@ void solve()
 {
     ll n;
     cin >> n;
-
-    for (ll i = 1; i <= n; i++)
+    ll total_sum = (n * (n + 1)) / 2;
+    if (total_sum % 2 != 0)
     {
-        cout << (((i * i) * (i * i - 1)) / 2) - (4 * (i - 1) * (i - 2)) << "\n";
+        cout << "NO\n";
+        return;
+    }
+    cout << "YES\n";
+    ll i = n;
+    ll half_1 = total_sum / 2;
+    unordered_map<ll, bool> used;
+    vector<ll> s1, s2;
+    while (half_1)
+    {
+        if (used.find(i) == used.end() && half_1 >= i)
+        {
+            half_1 -= i;
+            used[i] = true;
+            s1.push_back(i);
+        }
+        i--;
+    }
+    for (ll i = 1; i < n; i++)
+    {
+        if (used.find(i) == used.end())
+        {
+            s2.push_back(i);
+        }
+    }
+
+    cout << s1.size() << "\n";
+    for (const auto &v : s1)
+    {
+        cout << v << " ";
+    }
+    cout << "\n";
+
+    cout << s2.size() << "\n";
+    for (const auto &v : s2)
+    {
+        cout << v << " ";
     }
 }
 

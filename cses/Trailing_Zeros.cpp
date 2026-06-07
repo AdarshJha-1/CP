@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Two_Knights.cpp
+ * File:         Trailing_Zeros.cpp
  * Date:         2026-06-08
- * Time:         00:32:15
+ * Time:         02:08:28
  * ==========================================================
  */
 
@@ -13,13 +13,18 @@ using ll = long long;
 
 void solve()
 {
+    // idk it solvable by using "Legendre's Formula" have to check on YT
     ll n;
     cin >> n;
-
-    for (ll i = 1; i <= n; i++)
+    ll p = 5;
+    ll count = 0;
+    while (p <= n)
     {
-        cout << (((i * i) * (i * i - 1)) / 2) - (4 * (i - 1) * (i - 2)) << "\n";
+        count += (n / p);
+        p *= 5;
     }
+
+    cout << count << "\n";
 }
 
 int main()

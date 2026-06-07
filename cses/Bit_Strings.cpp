@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Two_Knights.cpp
+ * File:         Bit_Strings.cpp
  * Date:         2026-06-08
- * Time:         00:32:15
+ * Time:         01:59:21
  * ==========================================================
  */
 
@@ -11,15 +11,20 @@
 using namespace std;
 using ll = long long;
 
+constexpr int MOD = 1e9 + 7;
+
 void solve()
 {
     ll n;
     cin >> n;
 
-    for (ll i = 1; i <= n; i++)
+    ll ans = 1;
+    while (n-- > 0)
     {
-        cout << (((i * i) * (i * i - 1)) / 2) - (4 * (i - 1) * (i - 2)) << "\n";
+        ans = (ans * 2) % MOD;
     }
+
+    cout << ans << "\n";
 }
 
 int main()
