@@ -3,7 +3,7 @@
  * Name:         Adarsh Jha, Aka Mr. Fool
  * File:         Apple_Division.cpp
  * Date:         2026-06-08
- * Time:         19:27:44
+ * Time:         23:10:44
  * ==========================================================
  */
 
@@ -11,15 +11,30 @@
 using namespace std;
 using ll = long long;
 
+ll sol(ll s1, ll s2, vector<ll> &p, int i)
+{
+    if (i == p.size())
+    {
+        return abs(s1 - s2);
+    }
+
+    ll take = sol(s1 + p[i], s2, p, i + 1);
+    ll skip = sol(s1, s2 + p[i], p, i + 1);
+
+    return min(take, skip);
+}
+
 void solve()
 {
     int n;
-    ll p[n];
     cin >> n;
+    vector<ll> p(n, 0);
     for (int i = 0; i < n; i++)
     {
         cin >> p[i];
     }
+
+    cout << sol(0, 0, p, 0) << "\n";
 }
 
 int main()
