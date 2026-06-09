@@ -1,18 +1,34 @@
+/*
+ * ==========================================================
+ * Name:         Adarsh Jha, Aka Mr. Fool
+ * File:         A_AI_Project_Development.cpp
+ * Date:         2026-06-09
+ * Time:         20:05:32
+ * ==========================================================
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
-
-// Problem Statement
-/*
-
-*/
-
-// Observations
-/*
-
-*/
+using ll = long long;
 
 void solve()
 {
+    ll n, x, y, z;
+    cin >> n >> x >> y >> z;
+
+    ll o1 = (n + x + y - 1) / (x + y);
+
+    ll o2;
+    if ((n + x - 1) / x <= z)
+    {
+        o2 = (n + x - 1) / x;
+    }
+    else
+    {
+        o2 = z + (n - z * x + x + 10 * y - 1) / (x + 10 * y);
+    }
+
+    cout << min(o1, o2) << "\n";
 }
 
 int main()
