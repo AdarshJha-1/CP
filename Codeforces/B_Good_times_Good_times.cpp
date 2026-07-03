@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         C_Rumor.cpp
- * Date:         2026-07-03
- * Time:         23:45:55
+ * File:         B_Good_times_Good_times.cpp
+ * Date:         2026-06-30
+ * Time:         20:08:01
  * ==========================================================
  */
 
@@ -11,50 +11,45 @@
 using namespace std;
 using ll = long long;
 
-// return min gold cost
-ll dfs(vector<vector<ll>> &adj, ll curr, vector<bool> &seen, vector<ll> &cost)
-{
-    ll minCost = cost[curr];
-    seen[curr] = true;
-    for (const auto &nei : adj[curr])
-    {
-        if (!seen[nei])
-        {
-            minCost = min(minCost, dfs(adj, nei, seen, cost));
-        }
-    }
-    return minCost;
-}
+/*
 
+num = 73
+
+73 * 11 = 803
+
+      73
+    x 11
+      ==>   7  3
+         7  3  0
+      -> 8  0   3
+
+      but
+
+
+      73
+    x 101
+      ==>       7  3
+             0  0  0
+          7  3  0  0
+       -> 7  3  7  3
+
+
+
+
+ */
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    vector<ll> cost(n + 1, 0);
-    for (size_t i = 1; i <= n; ++i)
-    {
-        cin >> cost[i];
-    }
+    string x;
+    cin >> x;
+    int L = x.length();
 
-    vector<vector<ll>> adj(n + 1);
-    for (size_t i = 0; i < m; ++i)
+    long long y = 1;
+    for (int i = 0; i < L; i++)
     {
-        ll u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        y *= 10;
     }
-
-    ll minG = 0;
-    vector<bool> seen(n + 1, false);
-    for (size_t i = 1; i <= n; ++i)
-    {
-        if (!seen[i])
-        {
-            minG += dfs(adj, i, seen, cost);
-        }
-    }
-    cout << minG << "\n";
+    y += 1;
+    cout << y << "\n";
 }
 
 int main()
@@ -63,7 +58,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

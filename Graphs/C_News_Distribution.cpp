@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         C_Rumor.cpp
- * Date:         2026-07-03
- * Time:         23:45:55
+ * File:         C_News_Distribution.cpp
+ * Date:         2026-07-04
+ * Time:         01:14:05
  * ==========================================================
  */
 
@@ -11,50 +11,77 @@
 using namespace std;
 using ll = long long;
 
-// return min gold cost
-ll dfs(vector<vector<ll>> &adj, ll curr, vector<bool> &seen, vector<ll> &cost)
+class DSU
 {
-    ll minCost = cost[curr];
-    seen[curr] = true;
-    for (const auto &nei : adj[curr])
+public:
+    vector<ll> parent;
+    vector<ll> grpSize;
+    DSU(int n)
     {
-        if (!seen[nei])
+        parent.resize(n + 1);
+        grpSize.resize(n + 1, 1);
+        for (size_t i = 1; i <= n; ++i)
         {
-            minCost = min(minCost, dfs(adj, nei, seen, cost));
+            parent[i] = i;
         }
     }
-    return minCost;
-}
+    ll find(ll v)
+    {
+        if (parent[v] == v)
+        {
+            return v;
+        }
+        return parent[v] = find(parent[v]);
+    }
+    void union_sets(int u, int v)
+    {
+        int root_u = find(u);
+        int root_v = find(v);
+
+        if (root_u != root_v)
+        {
+            if (root_u < root_v)
+            {
+                parent[root_v] = root_u;
+                grpSize[root_u] += grpSize[root_v];
+            }
+            else
+            {
+                parent[root_u] = root_v;
+                grpSize[root_v] += grpSize[root_u];
+            }
+        }
+    }
+};
 
 void solve()
 {
     ll n, m;
     cin >> n >> m;
-    vector<ll> cost(n + 1, 0);
-    for (size_t i = 1; i <= n; ++i)
-    {
-        cin >> cost[i];
-    }
-
-    vector<vector<ll>> adj(n + 1);
+    DSU dsu(n);
     for (size_t i = 0; i < m; ++i)
     {
-        ll u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-
-    ll minG = 0;
-    vector<bool> seen(n + 1, false);
-    for (size_t i = 1; i <= n; ++i)
-    {
-        if (!seen[i])
+        ll s;
+        cin >> s;
+        if (s == 0)
         {
-            minG += dfs(adj, i, seen, cost);
+            continue;
+        }
+        ll u;
+        cin >> u;
+        for (size_t j = 1; j < s; j++)
+        {
+            ll v;
+            cin >> v;
+            dsu.union_sets(u, v);
         }
     }
-    cout << minG << "\n";
+
+    for (size_t i = 1; i <= n; ++i)
+    {
+        ll root = dsu.find(i);
+        cout << dsu.grpSize[root] << " ";
+    }
 }
 
 int main()

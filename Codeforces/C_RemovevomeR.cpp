@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         C_Rumor.cpp
- * Date:         2026-07-03
- * Time:         23:45:55
+ * File:         C_RemovevomeR.cpp
+ * Date:         2026-06-30
+ * Time:         20:28:16
  * ==========================================================
  */
 
@@ -11,50 +11,45 @@
 using namespace std;
 using ll = long long;
 
-// return min gold cost
-ll dfs(vector<vector<ll>> &adj, ll curr, vector<bool> &seen, vector<ll> &cost)
-{
-    ll minCost = cost[curr];
-    seen[curr] = true;
-    for (const auto &nei : adj[curr])
-    {
-        if (!seen[nei])
-        {
-            minCost = min(minCost, dfs(adj, nei, seen, cost));
-        }
-    }
-    return minCost;
-}
-
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    vector<ll> cost(n + 1, 0);
-    for (size_t i = 1; i <= n; ++i)
+    int n;
+    cin >> n;
+    string str;
+    cin >> str;
+
+    int c0 = 0, c1 = 0;
+    for (const auto &c : str)
     {
-        cin >> cost[i];
+        c0 += c == '0';
+        c1 += c == '1';
     }
 
-    vector<vector<ll>> adj(n + 1);
-    for (size_t i = 0; i < m; ++i)
+    if (c0 == 0 || c1 == 0)
     {
-        ll u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        cout << 1 << '\n';
+        return;
     }
 
-    ll minG = 0;
-    vector<bool> seen(n + 1, false);
-    for (size_t i = 1; i <= n; ++i)
+    int len = 0;
+    string compressed = "";
+    for (int i = 0; i < n; i++)
     {
-        if (!seen[i])
+        if (i == 0 || str[i] != str[i - 1])
         {
-            minG += dfs(adj, i, seen, cost);
+            compressed += str[i];
         }
     }
-    cout << minG << "\n";
+    if (compressed.length() >= 3)
+    {
+        len = 1;
+    }
+    else
+    {
+        len = 2;
+    }
+
+    cout << len << '\n';
 }
 
 int main()
@@ -63,7 +58,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

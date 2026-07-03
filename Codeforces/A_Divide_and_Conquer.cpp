@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         C_Rumor.cpp
- * Date:         2026-07-03
- * Time:         23:45:55
+ * File:         A_Divide_and_Conquer.cpp
+ * Date:         2026-06-30
+ * Time:         20:05:20
  * ==========================================================
  */
 
@@ -11,50 +11,11 @@
 using namespace std;
 using ll = long long;
 
-// return min gold cost
-ll dfs(vector<vector<ll>> &adj, ll curr, vector<bool> &seen, vector<ll> &cost)
-{
-    ll minCost = cost[curr];
-    seen[curr] = true;
-    for (const auto &nei : adj[curr])
-    {
-        if (!seen[nei])
-        {
-            minCost = min(minCost, dfs(adj, nei, seen, cost));
-        }
-    }
-    return minCost;
-}
-
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    vector<ll> cost(n + 1, 0);
-    for (size_t i = 1; i <= n; ++i)
-    {
-        cin >> cost[i];
-    }
-
-    vector<vector<ll>> adj(n + 1);
-    for (size_t i = 0; i < m; ++i)
-    {
-        ll u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-
-    ll minG = 0;
-    vector<bool> seen(n + 1, false);
-    for (size_t i = 1; i <= n; ++i)
-    {
-        if (!seen[i])
-        {
-            minG += dfs(adj, i, seen, cost);
-        }
-    }
-    cout << minG << "\n";
+    int x, y;
+    cin >> x >> y;
+    cout << (x % y == 0 ? "YES\n" : "NO\n");
 }
 
 int main()
@@ -63,7 +24,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();
