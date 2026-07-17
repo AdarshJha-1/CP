@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-14
- * Time:         16:38:49
+ * File:         C_Unstable_Elements.cpp
+ * Date:         2026-07-07
+ * Time:         14:24:02
  * ==========================================================
  */
 
@@ -13,17 +13,16 @@ using ll = long long;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    ll n, k;
+    cin >> n >> k;
+    unordered_map<ll, ll> freq;
 
+    int ans = 0;
     for (int i = 0; i < n; ++i)
     {
-        for (int j = 0; j < n; ++j)
-        {
-            int k = i + j;
-            cout << (k % n) << " ";
-        }
-        cout << "\n";
+        ll v;
+        cin >> v;
+        freq[v]++;
     }
 }
 
@@ -33,7 +32,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

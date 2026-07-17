@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-14
- * Time:         16:38:49
+ * File:         Coin_Combinations_II.cpp
+ * Date:         2026-07-17
+ * Time:         22:30:12
  * ==========================================================
  */
 
@@ -13,18 +13,6 @@ using ll = long long;
 
 void solve()
 {
-    int n;
-    cin >> n;
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            int k = i + j;
-            cout << (k % n) << " ";
-        }
-        cout << "\n";
-    }
 }
 
 int main()

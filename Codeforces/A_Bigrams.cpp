@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-14
- * Time:         16:38:49
+ * File:         A_Bigrams.cpp
+ * Date:         2026-07-06
+ * Time:         20:12:49
  * ==========================================================
  */
 
@@ -13,17 +13,33 @@ using ll = long long;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    int k;
+    cin >> k;
 
-    for (int i = 0; i < n; ++i)
+    int over2Cnt = 0;
+    int over3Cnt = 0;
+
+    while (k--)
     {
-        for (int j = 0; j < n; ++j)
+        ll v;
+        cin >> v;
+        if (v >= 2)
         {
-            int k = i + j;
-            cout << (k % n) << " ";
+            over2Cnt++;
         }
-        cout << "\n";
+        if (v >= 3)
+        {
+            over3Cnt++;
+        }
+    }
+
+    if (over2Cnt >= 2 || over3Cnt >= 1)
+    {
+        cout << "YES\n";
+    }
+    else
+    {
+        cout << "NO\n";
     }
 }
 
@@ -33,7 +49,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

@@ -1,30 +1,43 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-14
- * Time:         16:38:49
+ * File:         Coin_Combinations_I.cpp
+ * Date:         2026-07-17
+ * Time:         21:47:31
  * ==========================================================
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+const ll INF = 1e18;
+const int MOD = 1e9 + 7;
 
 void solve()
 {
-    int n;
-    cin >> n;
-
-    for (int i = 0; i < n; ++i)
+    ll n, x;
+    cin >> n >> x;
+    vector<ll> coins(n);
+    for (auto &c : coins)
     {
-        for (int j = 0; j < n; ++j)
-        {
-            int k = i + j;
-            cout << (k % n) << " ";
-        }
-        cout << "\n";
+        cin >> c;
     }
+
+    vector<ll> count(x + 1, 0);
+    count[0] = 1;
+
+    for (ll i = 1; i <= x; i++)
+    {
+        for (ll j = 0; j < n; j++)
+        {
+            ll remain = i - coins[j];
+            if (remain >= 0)
+            {
+                count[i] = (count[i] + count[remain]) % MOD;
+            }
+        }
+    }
+    cout << count[x] << "\n";
 }
 
 int main()

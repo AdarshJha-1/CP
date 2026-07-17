@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-14
- * Time:         16:38:49
+ * File:         B_Predominant_Frequency_Division.cpp
+ * Date:         2026-07-06
+ * Time:         20:27:27
  * ==========================================================
  */
 
@@ -15,15 +15,53 @@ void solve()
 {
     int n;
     cin >> n;
-
-    for (int i = 0; i < n; ++i)
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; ++i)
     {
-        for (int j = 0; j < n; ++j)
+        cin >> a[i];
+    }
+
+    bool ans = false;
+
+    int left1 = 0, left2 = 0, left3 = 0;
+
+    for (int i = 1; i <= n - 2; ++i)
+    {
+        left1 += (a[i] == 1);
+        left2 += (a[i] == 2);
+        left3 += (a[i] == 3);
+
+        if (left1 >= (left2 + left3))
         {
-            int k = i + j;
-            cout << (k % n) << " ";
+
+            int mid1 = 0, mid2 = 0, mid3 = 0;
+
+            for (int j = i + 1; j <= n - 1; ++j)
+            {
+                mid1 += (a[j] == 1);
+                mid2 += (a[j] == 2);
+                mid3 += (a[j] == 3);
+                if ((mid1 + mid2) >= mid3)
+                {
+                    ans = true;
+                    break;
+                }
+            }
         }
-        cout << "\n";
+
+        if (ans)
+        {
+            break;
+        }
+    }
+
+    if (ans)
+    {
+        cout << "YES\n";
+    }
+    else
+    {
+        cout << "NO\n";
     }
 }
 
@@ -33,7 +71,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

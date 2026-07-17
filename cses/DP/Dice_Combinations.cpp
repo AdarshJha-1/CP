@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-14
- * Time:         16:38:49
+ * File:         Dice_Combinations.cpp
+ * Date:         2026-07-17
+ * Time:         19:57:40
  * ==========================================================
  */
 
@@ -11,20 +11,39 @@
 using namespace std;
 using ll = long long;
 
+vector<ll> dp;
+const int MOD = 1e9 + 7;
+
+ll sol(ll cs, int n)
+{
+    if (cs > n)
+    {
+        return 0;
+    }
+    if (cs == n)
+    {
+        return 1;
+    }
+    if (dp[cs] != -1)
+    {
+        return dp[cs];
+    }
+    ll c = 0;
+    for (int i = 1; i <= 6; i++)
+    {
+        c = (c + sol(cs + i, n)) % MOD;
+    }
+    return dp[cs] = c;
+}
+
 void solve()
 {
     int n;
     cin >> n;
 
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            int k = i + j;
-            cout << (k % n) << " ";
-        }
-        cout << "\n";
-    }
+    dp.assign(n + 1, -1);
+
+    cout << sol(0, n) << '\n';
 }
 
 int main()
