@@ -1,39 +1,33 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Coin_Combinations_II.cpp
- * Date:         2026-07-17
- * Time:         22:30:12
+ * File:         Removing_Digits.cpp
+ * Date:         2026-07-18
+ * Time:         15:24:33
  * ==========================================================
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const ll MOD = 1e9 + 7;
+const ll INF = 1e18;
 
 void solve()
 {
+    ll n;
+    cin >> n;
 
-    ll n, x;
-    cin >> n >> x;
-    vector<ll> coins(n);
-    for (auto &c : coins)
+    vector<ll> dp(n + 1, INF);
+    dp[0] = 0;
+    for (ll i = 1; i <= n; i++)
     {
-        cin >> c;
-    }
-
-    vector<ll> dp(x + 1, 0);
-    dp[0] = 1;
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = coins[i]; j <= x; j++)
+        for (const auto d : to_string(i))
         {
-            dp[j] = (dp[j] + dp[j - coins[i]]) % MOD;
+            ll digit = d - '0';
+            dp[i] = min(dp[i], (dp[i - digit] + 1));
         }
     }
-
-    cout << dp[x] << '\n';
+    cout << dp[n] << '\n';
 }
 
 int main()

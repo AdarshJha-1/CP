@@ -1,39 +1,56 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Coin_Combinations_II.cpp
- * Date:         2026-07-17
- * Time:         22:30:12
+ * File:         Grid_Paths_I.cpp
+ * Date:         2026-07-18
+ * Time:         18:21:02
  * ==========================================================
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+const ll INF = 1e18;
 const ll MOD = 1e9 + 7;
 
 void solve()
 {
-
-    ll n, x;
-    cin >> n >> x;
-    vector<ll> coins(n);
-    for (auto &c : coins)
+    ll n;
+    cin >> n;
+    vector<string> grid(n);
+    for (auto &g : grid)
     {
-        cin >> c;
+        cin >> g;
     }
-
-    vector<ll> dp(x + 1, 0);
-    dp[0] = 1;
-    for (ll i = 0; i < n; i++)
+    if (grid[0][0] == '*')
     {
-        for (ll j = coins[i]; j <= x; j++)
+        cout << 0 << '\n';
+        return;
+    }
+    vector<vector<ll>> dp(n, vector<ll>(n, 0));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
         {
-            dp[j] = (dp[j] + dp[j - coins[i]]) % MOD;
+            if (i == 0 && i == j)
+            {
+                dp[i][j] = 1;
+                continue;
+            }
+            // left
+            if (j - 1 >= 0 && grid[i][j] == '.')
+            {
+                dp[i][j] = (dp[i][j] + dp[i][j - 1]) % MOD;
+            }
+
+            // down
+            if (i - 1 >= 0 && grid[i][j] == '.')
+            {
+                dp[i][j] = (dp[i][j] + dp[i - 1][j]) % MOD;
+            }
         }
     }
-
-    cout << dp[x] << '\n';
+    cout << dp[n - 1][n - 1] << "\n";
 }
 
 int main()
