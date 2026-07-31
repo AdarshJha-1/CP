@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-27
- * Time:         18:55:03
+ * File:         D_Divisible_Pairs.cpp
+ * Date:         2026-07-23
+ * Time:         12:52:37
  * ==========================================================
  */
 
@@ -15,16 +15,27 @@ const ll MOD = 1e9 + 7;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++)
+    ll n, x, y;
+    cin >> n >> x >> y;
+    vector<ll> arr(n);
+    for (auto &a : arr)
     {
-        for (int j = 0; j < n; j++)
-        {
-            cout << (i ^ j) << " ";
-        }
-        cout << '\n';
+        cin >> a;
     }
+
+    int cnt = 0;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if ((arr[i] + arr[j]) % x == 0 && (arr[i] - arr[j]) % y == 0)
+            {
+                cnt++;
+            }
+        }
+    }
+    cout << cnt << '\n';
 }
 
 int main()
@@ -33,7 +44,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

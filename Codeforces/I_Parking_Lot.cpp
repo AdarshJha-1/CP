@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-27
- * Time:         18:55:03
+ * File:         I_Parking_Lot.cpp
+ * Date:         2026-07-28
+ * Time:         17:25:51
  * ==========================================================
  */
 
@@ -16,15 +16,6 @@ const ll MOD = 1e9 + 7;
 void solve()
 {
     int n;
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            cout << (i ^ j) << " ";
-        }
-        cout << '\n';
-    }
 }
 
 int main()

@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-27
- * Time:         18:55:03
+ * File:         A_Flipping_Game.cpp
+ * Date:         2026-07-31
+ * Time:         20:11:17
  * ==========================================================
  */
 
@@ -17,14 +17,35 @@ void solve()
 {
     int n;
     cin >> n;
+    vector<int> arr(n);
+    for (auto &a : arr)
+    {
+        cin >> a;
+    }
+
+    int ans = 0;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = i; j < n; j++)
         {
-            cout << (i ^ j) << " ";
+            int cnt = 0;
+            for (int k = i - 1; k >= 0; k--)
+            {
+                cnt += (arr[k] == 1);
+            }
+            for (int k = i; k <= j; k++)
+            {
+                cnt += (arr[k] == 0);
+            }
+            for (int k = j + 1; k < n; k++)
+            {
+                cnt += (arr[k] == 1);
+            }
+            ans = max(ans, cnt);
         }
-        cout << '\n';
     }
+
+    cout << ans << '\n';
 }
 
 int main()

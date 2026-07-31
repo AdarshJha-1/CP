@@ -1,1 +1,0 @@
-{"name":"Local: N-th Prime","url":"/home/adarsh/Codes/CP/Number Theory/N-th Prime.cpp","tests":[{"id":1782594032210,"input":"1","output":"2"},{"id":1782594050605,"input":"2","output":"3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/adarsh/Codes/CP/Number Theory/N-th Prime.cpp","group":"local","local":true}

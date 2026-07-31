@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-27
- * Time:         18:55:03
+ * File:         Knight_Moves_Grid.cpp
+ * Date:         2026-07-28
+ * Time:         15:41:40
  * ==========================================================
  */
 
@@ -13,15 +13,52 @@ using ll = long long;
 const ll INF = 1e18;
 const ll MOD = 1e9 + 7;
 
+int getMinKnightMoves(int i, int j, int n)
+{
+    int x = abs(i);
+    int y = abs(j);
+
+    if ((x == 0 && y == 1) || (x == 1 && y == 0))
+    {
+        return 3;
+    }
+    if (x == 2 && y == 2)
+    {
+        return 4;
+    }
+    if (x == 1 && y == 1)
+    {
+        return 4;
+    }
+    if (x == 0 && y == 0)
+    {
+        return 0;
+    }
+    if (n == 4)
+    {
+        if ((x == 0 && y == 3) || (x == 3 && y == 0))
+            return 5;
+    }
+
+    int ceil_x = (x + 2 - 1) / 2;
+    int ceil_y = (y + 2 - 1) / 2;
+    int ceil_xy = (x + y + 3 - 1) / 3;
+
+    int m_prime = max({ceil_x, ceil_y, ceil_xy});
+
+    return m_prime + ((m_prime + x + y) % 2);
+}
+
 void solve()
 {
     int n;
     cin >> n;
+
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            cout << (i ^ j) << " ";
+            cout << getMinKnightMoves(i, j, n) << ' ';
         }
         cout << '\n';
     }

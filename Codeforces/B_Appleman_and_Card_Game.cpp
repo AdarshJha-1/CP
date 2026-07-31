@@ -1,9 +1,9 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Mex_Grid_Construction.cpp
- * Date:         2026-07-27
- * Time:         18:55:03
+ * File:         B_Appleman_and_Card_Game.cpp
+ * Date:         2026-07-31
+ * Time:         20:22:51
  * ==========================================================
  */
 
@@ -15,16 +15,48 @@ const ll MOD = 1e9 + 7;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++)
+    ll n, K;
+    cin >> n >> K;
+
+    unordered_map<char, ll> m;
+
+    for (ll i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            cout << (i ^ j) << " ";
-        }
-        cout << '\n';
+        char ch;
+        cin >> ch;
+        m[ch]++;
     }
+    vector<pair<ll, char>> mp(26);
+    for (auto const &[k, v] : m)
+    {
+        mp[k - 'A'] = {v, k};
+    }
+
+    sort(mp.rbegin(), mp.rend());
+
+    // for (const auto &[v, k] : mp)
+    // {
+    //     cout << k << " " << v << '\n';
+    // }
+    ll ans = 0;
+    for (const auto &[v, k] : mp)
+    {
+        if (K <= v)
+        {
+            ans += K * K;
+            break;
+        }
+        else
+        {
+            ans += v * v;
+            K -= v;
+        }
+        if (K <= 0)
+        {
+            break;
+        }
+    }
+    cout << ans << '\n';
 }
 
 int main()
