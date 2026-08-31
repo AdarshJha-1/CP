@@ -1,60 +1,58 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         C_Rumor.cpp
- * Date:         2026-07-03
- * Time:         23:45:55
+ * File:         B_Merge_to_Match.cpp
+ * Date:         2026-08-01
+ * Time:         20:15:24
  * ==========================================================
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-
-// return min gold cost
-ll dfs(vector<vector<ll>> &adj, ll curr, vector<bool> &seen, vector<ll> &cost)
-{
-    ll minCost = cost[curr];
-    seen[curr] = true;
-    for (const auto &nei : adj[curr])
-    {
-        if (!seen[nei])
-        {
-            minCost = min(minCost, dfs(adj, nei, seen, cost));
-        }
-    }
-    return minCost;
-}
+const ll INF = 1e18;
+const ll MOD = 1e9 + 7;
 
 void solve()
 {
     ll n, m;
     cin >> n >> m;
-    vector<ll> cost(n + 1, 0);
-    for (size_t i = 1; i <= n; ++i)
+    vector<ll> a(n), b(m);
+    for (auto &i : a)
     {
-        cin >> cost[i];
+        cin >> i;
+    }
+    for (auto &i : b)
+    {
+        cin >> i;
     }
 
-    vector<vector<ll>> adj(n + 1);
-    for (size_t i = 0; i < m; ++i)
+    if (n < 2 * m)
     {
-        ll u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        cout << "NO\n";
+        return;
     }
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
 
-    ll minG = 0;
-    vector<bool> seen(n + 1, false);
-    for (size_t i = 1; i <= n; ++i)
+    bool uwu = true;
+    for (int i = 0; i < m; ++i)
     {
-        if (!seen[i])
+        if (a[i] > b[i] || a[n - m + i] < b[i])
         {
-            minG += dfs(adj, i, seen, cost);
+            uwu = false;
+            break;
         }
     }
-    cout << minG << "\n";
+
+    if (uwu)
+    {
+        cout << "YES\n";
+    }
+    else
+    {
+        cout << "NO\n";
+    }
 }
 
 int main()
@@ -63,7 +61,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

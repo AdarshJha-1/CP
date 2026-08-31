@@ -1,42 +1,49 @@
 /*
  * ==========================================================
  * Name:         Adarsh Jha, Aka Mr. Fool
- * File:         Ferris_Wheel.cpp
- * Date:         2026-06-29
- * Time:         17:02:23
+ * File:         A_You_Delete_I_Delete.cpp
+ * Date:         2026-08-01
+ * Time:         20:05:52
  * ==========================================================
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+const ll INF = 1e18;
+const ll MOD = 1e9 + 7;
 
 void solve()
 {
-    ll n, x;
-    cin >> n >> x;
-    vector<ll> v(n);
-    for (ll i = 0; i < n; i++)
+    string str;
+    cin >> str;
+    int a = 1;
+    int b = 1;
+    for (int i = 0; i < str.size(); i++)
     {
-        cin >> v[i];
-    }
-    sort(v.begin(), v.end());
-
-    ll ans = 0;
-    ll i = 0;
-    ll j = n - 1;
-
-    while (i <= j)
-    {
-        if (v[i] + v[j] <= x)
+        if (str[i] == '0')
         {
-            i++;
+            str[i] = '#';
+            break;
         }
-        ans++;
-        j--;
     }
 
-    cout << ans << "\n";
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] == '1')
+        {
+            str[i] = '#';
+            break;
+        }
+    }
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] != '#')
+        {
+            cout << str[i];
+        }
+    }
+    cout << "\n";
 }
 
 int main()
@@ -45,7 +52,7 @@ int main()
     cin.tie(nullptr);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();
